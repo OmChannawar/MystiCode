@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Random Code Generator</title>
+    <link rel="stylesheet" href="styles.css"/>
+    <link rel="icon" type="image/png" href="favicon.png"/>
+</head>
+<body>
+    <header>
+        <h1>Random Code Generator</h1>
+        <p>Generate unique codes based on your preferences.</p>
+    </header>
+
+    <main class="container">
+        <section class="generator-section">
+            <h2>Generate Your Code</h2>
+
+            <!-- Code Length Selection -->
+            <div class="input-group">
+                <label>Code Length:</label>
+                <small>Select code length between 4 and 10</small>
+                <div class="radio-group" id="codeLengthOptions">
+                    <label><input type="radio" name="codeLength" value="4" checked> 4</label>
+                    <label><input type="radio" name="codeLength" value="5"> 5</label>
+                    <label><input type="radio" name="codeLength" value="6"> 6</label>
+                    <label><input type="radio" name="codeLength" value="7"> 7</label>
+                    <label><input type="radio" name="codeLength" value="8"> 8</label>
+                    <label><input type="radio" name="codeLength" value="9"> 9</label>
+                    <label><input type="radio" name="codeLength" value="10"> 10</label>
+                </div>
+            </div>
+
+            <!-- Character Type Selection -->
+            <div class="input-group">
+                <label>Character Type:</label>
+                <small>Choose the type of characters to include</small>
+                <div id="charSetOptions">
+                    <label><input type="radio" name="charSet" value="numbers_only" checked> Numeric</label>
+                    <label><input type="radio" name="charSet" value="alphabets_only"> Alphabets</label>
+                    <label><input type="radio" name="charSet" value="mixed"> Alpha-Numeric</label>
+                    <label><input type="radio" name="charSet" value="mixed_special"> Mixed with Special Characters</label>
+                </div>
+            </div>
+
+            <button id="generateBtn" class="btn primary-btn">Generate Code</button>
+            <button id="clearBtn" class="btn secondary-btn">Clear</button>
+        </section>
+
+        <section class="display-section">
+            <h2>Generated Code</h2>
+            <div class="code-display" id="generatedCodeDisplay">
+                <p>Your generated code will appear here.</p>
+            </div>
+            <button id="copyBtn" class="btn success-btn" disabled>Copy Code</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Random Code Generator.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
