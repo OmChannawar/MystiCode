@@ -121,8 +121,8 @@ small {
     background-color: #218838;
 }
 
-/* Code Display */
-.code-display {
+/* PIN Display */
+.PIN-display {
     padding: 15px;
     border: 2px dashed #aaa;
     background-color: #f9f9f9;

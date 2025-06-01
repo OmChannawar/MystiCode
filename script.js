@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Get references to HTML elements
-    const codeLengthRadios = document.querySelectorAll('input[name="codeLength"]');
+    const PINLengthRadios = document.querySelectorAll('input[name="PINLength"]');
     const charSetRadios = document.querySelectorAll('input[name="charSet"]'); 
     const generateBtn = document.getElementById('generateBtn');
     const clearBtn = document.getElementById('clearBtn');
-    const generatedCodeDisplay = document.getElementById('generatedCodeDisplay');
+    const generatedPINDisplay = document.getElementById('generatedPINDisplay');
     const copyBtn = document.getElementById('copyBtn');
 
     // Event Listeners
-    generateBtn.addEventListener('click', generateRandomCode);
+    generateBtn.addEventListener('click', generateRandomPIN);
     clearBtn.addEventListener('click', clearDisplay);
-    copyBtn.addEventListener('click', copyCodeToClipboard);
+    copyBtn.addEventListener('click', copyPINToClipboard);
 
     const DIGITS = '0123456789';
     const ASCII_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const ALPHANUMERIC = ASCII_LETTERS + DIGITS;
     const SPECIAL_CHARS = '!@#$%^&*()_+[]{}|;:,.<>?';
 
-    function getSelectedCodeLength() {
-        for (let radio of codeLengthRadios) {
+    function getSelectedPINLength() {
+        for (let radio of PINLengthRadios) {
             if (radio.checked) {
                 return parseInt(radio.value);
             }
@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
-    function generateRandomCode() {
+    function generateRandomPIN() {
         const choice = document.querySelector('input[name="charSet"]:checked').value; 
-        const length = getSelectedCodeLength();
+        const length = getSelectedPINLength();
 
         if (isNaN(length) || length < 4 || length > 10) {
             alert("Invalid length! Please select a value between 4 and 10.");
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             result = Array.from({ length }, () => charset[Math.floor(Math.random() * charset.length)]).join('');
         }
 
-        displayCode(result);
+        displayPIN(result);
         copyBtn.disabled = false;
     }
 
@@ -76,33 +76,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function displayCode(code) {
-        generatedCodeDisplay.innerHTML = ''; 
+    function displayPIN(PIN) {
+        generatedPINDisplay.innerHTML = ''; 
         const span = document.createElement('span');
         span.classList.add('generated');
-        span.textContent = code;
-        generatedCodeDisplay.appendChild(span);
-        generatedCodeDisplay.classList.add('generated');
+        span.textContent = PIN;
+        generatedPINDisplay.appendChild(span);
+        generatedPINDisplay.classList.add('generated');
     }
 
     function clearDisplay() {
-        generatedCodeDisplay.innerHTML = '<p>Your generated code will appear here.</p>';
-        generatedCodeDisplay.classList.remove('generated');
+        generatedPINDisplay.innerHTML = '<p>Your generated PIN will appear here.</p>';
+        generatedPINDisplay.classList.remove('generated');
         copyBtn.disabled = true;
     }
 
-    async function copyCodeToClipboard() {
-        const codeElement = generatedCodeDisplay.querySelector('.generated');
-        if (codeElement) {
-            const code = codeElement.textContent;
+    async function copyPINToClipboard() {
+        const PINElement = generatedPINDisplay.querySelector('.generated');
+        if (PINElement) {
+            const PIN = PINElement.textContent;
             try {
-                await navigator.clipboard.writeText(code);
+                await navigator.clipboard.writeText(PIN);
                 copyBtn.textContent = 'Copied!';
                 setTimeout(() => {
-                    copyBtn.textContent = 'Copy Code';
+                    copyBtn.textContent = 'Copy PIN';
                 }, 2000);
             } catch (err) {
-                alert('Failed to copy code. Please copy manually: ' + code);
+                alert('Failed to copy PIN. Please copy manually: ' + PIN);
             }
         }
     }
