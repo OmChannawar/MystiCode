@@ -7,8 +7,8 @@
 }
 
 body {
-    background-color: #f4f7f9;
-    color: #333;
+    background-color: #f2f8fc;
+    color: #2e3a59;
     line-height: 1.6;
     padding: 20px;
 }
@@ -21,7 +21,7 @@ header, footer {
 
 header h1 {
     font-size: 2.5rem;
-    color: #005792;
+    color: #0077b6;
 }
 
 header p {
@@ -31,17 +31,17 @@ header p {
 
 footer p {
     font-size: 0.9rem;
-    color: #777;
+    color: #888;
 }
 
 /* Container */
 .container {
     max-width: 800px;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 15px rgba(0, 119, 182, 0.1);
 }
 
 /* Sections */
@@ -50,7 +50,7 @@ footer p {
 }
 
 h2 {
-    color: #003f5c;
+    color: #023e8a;
     margin-bottom: 15px;
 }
 
@@ -63,7 +63,7 @@ h2 {
     font-weight: 600;
     display: block;
     margin-bottom: 6px;
-    color: #222;
+    color: #2e3a59;
 }
 
 .radio-group label,
@@ -72,12 +72,17 @@ h2 {
     display: inline-block;
     cursor: pointer;
     font-weight: 500;
+    color: #0077b6;
+}
+
+input[type="radio"] {
+    margin-right: 6px;
 }
 
 small {
     display: block;
     margin-top: 6px;
-    color: #777;
+    color: #6c757d;
     font-size: 0.85rem;
 }
 
@@ -89,47 +94,52 @@ small {
     margin-top: 10px;
     cursor: pointer;
     font-size: 1rem;
-    transition: 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:active {
+    transform: scale(0.97);
 }
 
 .primary-btn {
-    background-color: #007bff;
+    background-color: #0077b6;
     color: #fff;
 }
 
 .primary-btn:hover {
-    background-color: #0056b3;
+    background-color: #005f87;
 }
 
 .secondary-btn {
-    background-color: #6c757d;
+    background-color: #adb5bd;
     color: #fff;
     margin-left: 10px;
 }
 
 .secondary-btn:hover {
-    background-color: #5a6268;
+    background-color: #6c757d;
 }
 
 .success-btn {
-    background-color: #28a745;
+    background-color: #38b000;
     color: #fff;
     margin-top: 15px;
 }
 
 .success-btn:hover {
-    background-color: #218838;
+    background-color: #2d9e00;
 }
 
-/* PIN Display */
-.PIN-display {
+/* Code Display */
+.PIN-display,
+.code-display {
     padding: 15px;
-    border: 2px dashed #aaa;
-    background-color: #f9f9f9;
+    border: 2px dashed #0096c7;
+    background-color: #e3f2fd;
     border-radius: 10px;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1.2rem;
-    color: #222;
+    font-size: 1.3rem;
+    color: #1b263b;
     min-height: 50px;
     display: flex;
     align-items: center;
@@ -144,4 +154,26 @@ small {
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 8px;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .radio-group label,
+    #charSetOptions label {
+        width: 48%;
+        margin-bottom: 10px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .code-display, .PIN-display {
+        font-size: 1.1rem;
+    }
 }
