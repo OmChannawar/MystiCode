@@ -77,6 +77,11 @@ h2 {
     font-size: 1rem;
 }
 
+.radio-group input[type="radio"],
+#charSetOptions input[type="radio"] {
+    margin-right: 8px; /* Add space between radio and text */
+}
+
 small {
     display: block;
     margin-top: 6px;
@@ -171,11 +176,22 @@ small {
         font-size: 1.4rem;
     }
 
+    .radio-group {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
     .radio-group label,
     #charSetOptions label {
         display: flex;
         font-size: 0.95rem;
         margin-right: 10px;
+    }
+
+    .radio-group input[type="radio"],
+    #charSetOptions input[type="radio"] {
+        margin-right: 10px; /* Mobile spacing */
     }
 
     .btn {
