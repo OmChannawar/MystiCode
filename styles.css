@@ -186,7 +186,7 @@ small {
     #charSetOptions label {
         display: flex;
         font-size: 0.95rem;
-        margin-right: 10px;
+        margin-right: 20px;
     }
 
     .radio-group input[type="radio"],
