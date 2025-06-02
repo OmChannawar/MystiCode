@@ -1,4 +1,4 @@
-/* Reset & base styles */
+/* Reset & Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -7,51 +7,52 @@
 }
 
 body {
-    background-color: #f2f8fc;
-    color: #2e3a59;
+    background-color: #f4f7f9;
+    color: #333;
     line-height: 1.6;
-    padding: 20px;
+    padding: 15px;
 }
 
 /* Header & Footer */
 header, footer {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 header h1 {
-    font-size: 2.5rem;
-    color: #0077b6;
+    font-size: 2rem;
+    color: #005792;
 }
 
 header p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #444;
 }
 
 footer p {
-    font-size: 0.9rem;
-    color: #888;
+    font-size: 0.85rem;
+    color: #777;
 }
 
 /* Container */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    padding: 30px;
+    max-width: 600px;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 119, 182, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Sections */
 .generator-section, .display-section {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 h2 {
-    color: #023e8a;
+    color: #003f5c;
     margin-bottom: 15px;
+    font-size: 1.5rem;
 }
 
 /* Inputs & Labels */
@@ -63,83 +64,80 @@ h2 {
     font-weight: 600;
     display: block;
     margin-bottom: 6px;
-    color: #2e3a59;
+    color: #222;
+    font-size: 1rem;
 }
 
 .radio-group label,
 #charSetOptions label {
-    margin-right: 15px;
-    display: inline-block;
-    cursor: pointer;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 0.95rem;
     font-weight: 500;
-    color: #0077b6;
+    cursor: pointer;
+    color: #005792;
 }
 
 input[type="radio"] {
-    margin-right: 6px;
+    margin-right: 8px;
+    transform: scale(1.2);
 }
 
 small {
     display: block;
     margin-top: 6px;
-    color: #6c757d;
-    font-size: 0.85rem;
+    color: #777;
+    font-size: 0.8rem;
 }
 
 /* Buttons */
 .btn {
-    padding: 10px 20px;
+    padding: 12px;
+    width: 100%;
     border: none;
     border-radius: 6px;
     margin-top: 10px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn:active {
-    transform: scale(0.97);
+    transition: 0.3s ease;
 }
 
 .primary-btn {
-    background-color: #0077b6;
+    background-color: #007bff;
     color: #fff;
 }
 
 .primary-btn:hover {
-    background-color: #005f87;
+    background-color: #0056b3;
 }
 
 .secondary-btn {
-    background-color: #adb5bd;
+    background-color: #6c757d;
     color: #fff;
-    margin-left: 10px;
 }
 
 .secondary-btn:hover {
-    background-color: #6c757d;
+    background-color: #5a6268;
 }
 
 .success-btn {
-    background-color: #38b000;
+    background-color: #28a745;
     color: #fff;
-    margin-top: 15px;
 }
 
 .success-btn:hover {
-    background-color: #2d9e00;
+    background-color: #218838;
 }
 
-/* Code Display */
-.PIN-display,
-.code-display {
+/* PIN Display */
+.PIN-display {
     padding: 15px;
-    border: 2px dashed #0096c7;
-    background-color: #e3f2fd;
+    border: 2px dashed #aaa;
+    background-color: #f9f9f9;
     border-radius: 10px;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1.3rem;
-    color: #1b263b;
+    font-size: 1.2rem;
+    color: #222;
     min-height: 50px;
     display: flex;
     align-items: center;
@@ -148,32 +146,36 @@ small {
     margin-top: 10px;
 }
 
-/* Responsive Radio Buttons */
-.radio-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 8px;
-}
+/* Responsive Layout */
+@media screen and (max-width: 480px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
 
-/* Responsive */
-@media screen and (max-width: 600px) {
+    h2 {
+        font-size: 1.3rem;
+    }
+
     .btn {
-        width: 100%;
-        margin-bottom: 10px;
+        font-size: 0.95rem;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .radio-group,
+    #charSetOptions {
+        display: flex;
+        flex-direction: column;
     }
 
     .radio-group label,
     #charSetOptions label {
-        width: 48%;
-        margin-bottom: 10px;
+        font-size: 0.95rem;
     }
 
-    .container {
-        padding: 20px;
-    }
-
-    .code-display, .PIN-display {
-        font-size: 1.1rem;
+    input[type="radio"] {
+        transform: scale(1.1);
     }
 }
