@@ -19,7 +19,7 @@
 
             <!-- PIN Length Selection -->
             <div class="input-group">
-                <label>Length:</label>
+                <label for="PINLengthOptions">Length:</label>
                 <small>Select length between 4 and 10</small>
                 <div class="radio-group" id="PINLengthOptions">
                     <label><input type="radio" name="PINLength" value="4" checked> 4</label>
@@ -34,18 +34,20 @@
 
             <!-- Character Type Selection -->
             <div class="input-group">
-                <label>Character Type:</label>
+                <label for="charSetOptions">Character Type:</label>
                 <small>Choose the type of characters to include</small>
-                <div id="charSetOptions">
+                <div id="charSetOptions" class="radio-group">
                     <label><input type="radio" name="charSet" value="numbers_only" checked> Numeric</label>
                     <label><input type="radio" name="charSet" value="alphabets_only"> Alphabets</label>
                     <label><input type="radio" name="charSet" value="mixed"> Alpha-Numeric</label>
-                    <label><input type="radio" name="charSet" value="mixed_special"> Mixed with Special Characters</label>
+                    <label><input type="radio" name="charSet" value="mixed_special"> Mixed + Special</label>
                 </div>
             </div>
 
-            <button id="generateBtn" class="btn primary-btn">Generate PIN</button>
-            <button id="clearBtn" class="btn secondary-btn">Clear</button>
+            <div class="button-group">
+                <button id="generateBtn" class="btn primary-btn">Generate PIN</button>
+                <button id="clearBtn" class="btn secondary-btn">Clear</button>
+            </div>
         </section>
 
         <section class="display-section">
