@@ -1,6 +1,6 @@
 // ================================
 //  Supabase PIN Generator Script
-//  Row-based Visitor Counter
+//  Row‑based Visitor Counter (final)
 // ================================
 
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
@@ -11,14 +11,17 @@ const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFz
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON);
 
+/* -------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
-  const DIGITS   = '0123456789';
-  const LOWER    = 'abcdefghijklmnopqrstuvwxyz';
-  const UPPER    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const LETTERS  = LOWER + UPPER;
-  const ALPHA    = LETTERS + DIGITS;
-  const SPECIAL  = '!@#$%^&*()_+[]{}|;:,.<>?';
+  // Character sets
+  const DIGITS  = '0123456789';
+  const LOWER   = 'abcdefghijklmnopqrstuvwxyz';
+  const UPPER   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const LETTERS = LOWER + UPPER;
+  const ALPHA   = LETTERS + DIGITS;
+  const SPECIAL = '!@#$%^&*()_+[]{}|;:,.<>?';
 
+  // DOM refs
   const PINLengthRadios  = document.querySelectorAll('input[name="PINLength"]');
   const generateBtn      = document.getElementById('generateBtn');
   const clearBtn         = document.getElementById('clearBtn');
@@ -26,47 +29,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const copyBtn          = document.getElementById('copyBtn');
   const visitorDisplay   = document.getElementById('visitorCount');
 
+  // Init
   updateVisitorCount();
   bindEvents();
 
-  // ---------- Visitor Counter (row-based) ----------
-  async function updateVisitorCount () {
-    try {
-      // 1️⃣ Insert a new row as a visit
-      const { error: insertErr } = await supabase
-        .from('visitors')
-        .insert({}); // No columns
+  /* ---------- Visitor counter (row-based, Supabase v2) ---------- */
+async function updateVisitorCount () {
+  try {
+    // 1️⃣ Insert an empty row → log visit
+    const { error: insertErr } = await supabase
+        .from('visits')  // ✅ match the table name from Supabase
+        .insert([{}], { returning: 'minimal' });     // ← array form
+    if (insertErr) console.error('Insert failed:', insertErr);
 
-      if (insertErr) throw insertErr;
+    // 2️⃣ Count rows → total visits
+    const { count, error: countErr } = await supabase
+      .from('visitors')
+      .select('*', { count: 'exact', head: true }); // returns { data:null, count }
+    if (countErr) throw countErr;
 
-      // 2️⃣ Count all rows to get total visits
-      const { count, error: countErr } = await supabase
-        .from('visitors')
-        .select('*', { count: 'exact', head: true });
-
-      if (countErr) throw countErr;
-
-      // 3️⃣ Show result
-      if (visitorDisplay)
-        visitorDisplay.textContent = `🌐 Total visits: ${count}`;
-    } catch (err) {
-      console.error('Visitor count error:', err);
-      if (visitorDisplay)
-        visitorDisplay.textContent = '🌐 Visitors: Error loading';
-    }
+    visitorDisplay.textContent = `🌐 Total visits: ${count}`;
+  } catch (err) {
+    console.error('Visitor counter error:', err);
+    visitorDisplay.textContent = '🌐 Visitors: Error loading';
   }
+}
 
-  // ---------- Events ----------
+  /* ---------- Event bindings ---------- */
   function bindEvents () {
     generateBtn.addEventListener('click', generatePIN);
     clearBtn  .addEventListener('click', clearDisplay);
     copyBtn   .addEventListener('click', copyToClipboard);
   }
 
-  // ---------- PIN Generator ----------
+  /* ---------- PIN generator ---------- */
   function getSelectedLength () {
-    const r = [...PINLengthRadios].find(el => el.checked);
-    return r ? +r.value : null;
+    const el = [...PINLengthRadios].find(r => r.checked);
+    return el ? +el.value : null;
   }
 
   function generatePIN () {
@@ -78,21 +77,21 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    let pin;
-    switch (type) {
-      case 'numbers_only':   pin = sample(DIGITS, len); break;
-      case 'alphabets_only': pin = sample(LETTERS, len); break;
-      case 'mixed':          pin = mixedPIN(len);        break;
-      case 'mixed_special':  pin = sample(ALPHA + SPECIAL, len); break;
-      default: alert('Select a character type.'); return;
-    }
+    const pin = ({
+      numbers_only   : () => sample(DIGITS, len),
+      alphabets_only : () => sample(LETTERS, len),
+      mixed          : () => mixedPIN(len),
+      mixed_special  : () => sample(ALPHA + SPECIAL, len)
+    }[type] || (() => ''))();
+
+    if (!pin) { alert('Select a character type.'); return; }
 
     showPIN(pin);
     copyBtn.disabled = false;
   }
 
-  // ---------- Utility Functions ----------
-  const rand   = set => set[Math.floor(Math.random() * set.length)];
+  /* ---------- Utility helpers ---------- */
+  const rand   = set => set[Math.random() * set.length | 0];
   const sample = (set, n) => Array.from({ length: n }, () => rand(set)).join('');
 
   const mixedPIN = n => {
@@ -103,12 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const shuffle = arr => {
     for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = Math.random() * (i + 1) | 0;
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
   };
 
+  /* ---------- UI helpers ---------- */
   function showPIN (pin) {
     generatedDisplay.innerHTML = `<span class="generated">${pin}</span>`;
     generatedDisplay.classList.add('generated');
@@ -123,11 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
   async function copyToClipboard () {
     const span = generatedDisplay.querySelector('.generated');
     if (!span) return;
-
     try {
       await navigator.clipboard.writeText(span.textContent);
       copyBtn.textContent = 'Copied!';
-      setTimeout(() => { copyBtn.textContent = 'Copy PIN'; }, 2000);
+      setTimeout(() => (copyBtn.textContent = 'Copy PIN'), 2000);
     } catch {
       alert('Copy failed. Use Ctrl+C.');
     }
