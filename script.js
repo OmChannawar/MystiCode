@@ -1,15 +1,6 @@
 // ================================
-//  Supabase PIN Generator Script
-//  Row‑based Visitor Counter (final)
+//  MystiCode PIN Generator Script
 // ================================
-
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
-// ---- Supabase configuration ----
-const SUPABASE_URL  = 'https://wobhtcllbfjvqmfuwxex.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndvYmh0Y2xsYmZqdnFtZnV3eGV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkwNDMwMzAsImV4cCI6MjA2NDYxOTAzMH0.q-fqI5vHFPZZN5RG_sfnmVL2YD794dOg7SDPiMJxaf0';
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON);
 
 /* -------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
@@ -27,33 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const clearBtn         = document.getElementById('clearBtn');
   const generatedDisplay = document.getElementById('generatedPINDisplay');
   const copyBtn          = document.getElementById('copyBtn');
-  const visitorDisplay   = document.getElementById('visitorCount');
 
   // Init
-  updateVisitorCount();
   bindEvents();
-
-  /* ---------- Visitor counter (row-based, Supabase v2) ---------- */
-async function updateVisitorCount () {
-  try {
-    // 1️⃣ Insert an empty row → log visit
-    const { error: insertErr } = await supabase
-        .from('visits')  // ✅ match the table name from Supabase
-        .insert([{}], { returning: 'minimal' });     // ← array form
-    if (insertErr) console.error('Insert failed:', insertErr);
-
-    // 2️⃣ Count rows → total visits
-    const { count, error: countErr } = await supabase
-      .from('visitors')
-      .select('*', { count: 'exact', head: true }); // returns { data:null, count }
-    if (countErr) throw countErr;
-
-    visitorDisplay.textContent = `🌐 Total visits: ${count}`;
-  } catch (err) {
-    console.error('Visitor counter error:', err);
-    visitorDisplay.textContent = '🌐 Visitors: Error loading';
-  }
-}
 
   /* ---------- Event bindings ---------- */
   function bindEvents () {
