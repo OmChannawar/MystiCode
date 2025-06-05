@@ -1,68 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>PIN Generator</title>
-    <link rel="stylesheet" href="styles.css"/>
-    <link rel="icon" type="image/png" href="favicon.png"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PIN Generator</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="icon" type="image/png" href="favicon.png"/>
 </head>
 <body>
-    <header>
-        <h1>PIN Generator</h1>
-        <p>Generate unique PINs based on your preferences.</p>
-    </header>
+  <header>
+    <h1>PIN Generator</h1>
+    <p>Generate unique PINs based on your preferences.</p>
+    <div id="visitorCount" class="visitor-count">🌐 Loading visits...</div>
+  </header>
 
-    <main class="container">
-        <section class="generator-section">
-            <h2>Generate Your PIN</h2>
+  <main class="container">
+    <section class="generator-section">
+      <h2>Generate Your PIN</h2>
 
-            <!-- PIN Length Selection -->
-            <div class="input-group">
-                <label for="PINLengthOptions">Length:</label>
-                <small>Select length between 4 and 10</small>
-                <div class="radio-group" id="PINLengthOptions">
-                    <label><input type="radio" name="PINLength" value="4" checked> 4</label>
-                    <label><input type="radio" name="PINLength" value="5"> 5</label>
-                    <label><input type="radio" name="PINLength" value="6"> 6</label>
-                    <label><input type="radio" name="PINLength" value="7"> 7</label>
-                    <label><input type="radio" name="PINLength" value="8"> 8</label>
-                    <label><input type="radio" name="PINLength" value="9"> 9</label>
-                    <label><input type="radio" name="PINLength" value="10"> 10</label>
-                </div>
-            </div>
+      <!-- PIN Length Selection -->
+      <div class="input-group">
+        <label for="PINLengthOptions">Length:</label>
+        <small>Select length between 4 and 10</small>
+        <div class="radio-group" id="PINLengthOptions">
+          <label><input type="radio" name="PINLength" value="4" checked> 4</label>
+          <label><input type="radio" name="PINLength" value="5"> 5</label>
+          <label><input type="radio" name="PINLength" value="6"> 6</label>
+          <label><input type="radio" name="PINLength" value="7"> 7</label>
+          <label><input type="radio" name="PINLength" value="8"> 8</label>
+          <label><input type="radio" name="PINLength" value="9"> 9</label>
+          <label><input type="radio" name="PINLength" value="10"> 10</label>
+        </div>
+      </div>
 
-            <!-- Character Type Selection -->
-            <div class="input-group">
-                <label for="charSetOptions">Character Type:</label>
-                <small>Choose the type of characters to include</small>
-                <div id="charSetOptions" class="radio-group">
-                    <label><input type="radio" name="charSet" value="numbers_only" checked> Numeric</label>
-                    <label><input type="radio" name="charSet" value="alphabets_only"> Alphabets</label>
-                    <label><input type="radio" name="charSet" value="mixed"> Alpha-Numeric</label>
-                    <label><input type="radio" name="charSet" value="mixed_special"> Mixed + Special</label>
-                </div>
-            </div>
+      <!-- Character Type Selection -->
+      <div class="input-group">
+        <label for="charSetOptions">Character Type:</label>
+        <small>Choose the type of characters to include</small>
+        <div id="charSetOptions" class="radio-group">
+          <label><input type="radio" name="charSet" value="numbers_only" checked> Numeric</label>
+          <label><input type="radio" name="charSet" value="alphabets_only"> Alphabets</label>
+          <label><input type="radio" name="charSet" value="mixed"> Alpha-Numeric</label>
+          <label><input type="radio" name="charSet" value="mixed_special"> Mixed + Special</label>
+        </div>
+      </div>
 
-            <div class="button-group">
-                <button id="generateBtn" class="btn primary-btn">Generate PIN</button>
-                <button id="clearBtn" class="btn secondary-btn">Clear</button>
-            </div>
-        </section>
+      <!-- Buttons -->
+      <div class="button-group">
+        <button id="generateBtn" class="btn primary-btn">Generate PIN</button>
+        <button id="clearBtn" class="btn secondary-btn">Clear</button>
+      </div>
+    </section>
 
-        <section class="display-section">
-            <h2>Generated PIN</h2>
-            <div class="PIN-display" id="generatedPINDisplay">
-                <p>Your generated PIN will appear here.</p>
-            </div>
-            <button id="copyBtn" class="btn success-btn" disabled>Copy PIN</button>
-        </section>
-    </main>
+    <!-- Output Display -->
+    <section class="display-section">
+      <h2>Generated PIN</h2>
+      <div class="PIN-display" id="generatedPINDisplay">
+        <p>Your generated PIN will appear here.</p>
+      </div>
+      <button id="copyBtn" class="btn success-btn" disabled>Copy PIN</button>
+    </section>
+  </main>
 
-    <footer>
-        <p>&copy; 2025 Om A. Channawar. All rights reserved.</p>
-    </footer>
+  <footer>
+    <p>&copy; 2025 Om A. Channawar. All rights reserved.</p>
+  </footer>
 
-    <script src="script.js"></script>
+  <!-- JS Module -->
+  <script src="script.js" type="module"></script>
 </body>
 </html>
